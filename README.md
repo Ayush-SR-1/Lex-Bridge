@@ -1,6 +1,6 @@
 # LegalEase AI Assistant
 
-hi there, i am in a hackaton and i want u to make me a perfect working model related to the ppt i have attached with a feature need in  a lwayer related website\
+hi there, i am in a hackaton and i want u to make me a perfect working model related to the ppt i have attached with a feature need in  a lwayer related website (https://lexbridge2026.lovable.app)
 
 This project was built with [Lovable](https://lovable.dev).
 
