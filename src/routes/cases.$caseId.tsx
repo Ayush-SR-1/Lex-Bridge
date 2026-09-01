@@ -320,6 +320,8 @@ function CasePage() {
                 </div>
               )}
             </Panel>
+
+            <CaseRoom caseId={caseId} />
           </div>
 
           <div className="space-y-6 lg:col-span-4">
