@@ -14,16 +14,295 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      case_documents: {
+        Row: {
+          case_id: string
+          created_at: string
+          due_on: string | null
+          id: string
+          kind: string
+          name: string
+          status: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          due_on?: string | null
+          id?: string
+          kind?: string
+          name: string
+          status?: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          due_on?: string | null
+          id?: string
+          kind?: string
+          name?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_documents_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      case_milestones: {
+        Row: {
+          case_id: string
+          created_at: string
+          detail: string
+          id: string
+          occurred_on: string | null
+          position: number
+          status: string
+          title: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          detail?: string
+          id?: string
+          occurred_on?: string | null
+          position?: number
+          status?: string
+          title: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          detail?: string
+          id?: string
+          occurred_on?: string | null
+          position?: number
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_milestones_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cases: {
+        Row: {
+          client_id: string
+          created_at: string
+          description: string
+          id: string
+          lawyer_id: string | null
+          location: string
+          next_hearing_at: string | null
+          next_hearing_venue: string | null
+          practice_area: string
+          pro_bono: boolean
+          stage: string
+          status_note: string
+          title: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          description?: string
+          id?: string
+          lawyer_id?: string | null
+          location?: string
+          next_hearing_at?: string | null
+          next_hearing_venue?: string | null
+          practice_area?: string
+          pro_bono?: boolean
+          stage?: string
+          status_note?: string
+          title: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          description?: string
+          id?: string
+          lawyer_id?: string | null
+          location?: string
+          next_hearing_at?: string | null
+          next_hearing_venue?: string | null
+          practice_area?: string
+          pro_bono?: boolean
+          stage?: string
+          status_note?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cases_lawyer_id_fkey"
+            columns: ["lawyer_id"]
+            isOneToOne: false
+            referencedRelation: "lawyers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      engagement_requests: {
+        Row: {
+          case_id: string
+          client_id: string
+          created_at: string
+          id: string
+          lawyer_id: string
+          message: string
+          status: string
+        }
+        Insert: {
+          case_id: string
+          client_id: string
+          created_at?: string
+          id?: string
+          lawyer_id: string
+          message?: string
+          status?: string
+        }
+        Update: {
+          case_id?: string
+          client_id?: string
+          created_at?: string
+          id?: string
+          lawyer_id?: string
+          message?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "engagement_requests_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "engagement_requests_lawyer_id_fkey"
+            columns: ["lawyer_id"]
+            isOneToOne: false
+            referencedRelation: "lawyers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lawyers: {
+        Row: {
+          availability: string
+          bench: string
+          bio: string
+          created_at: string
+          fee_inr: number
+          id: string
+          name: string
+          practice_areas: string[]
+          pro_bono_available: boolean
+          pro_bono_matters: number
+          response_time: string
+          success_rate: number
+          user_id: string | null
+          verified: boolean
+          years_experience: number
+        }
+        Insert: {
+          availability?: string
+          bench?: string
+          bio?: string
+          created_at?: string
+          fee_inr?: number
+          id?: string
+          name: string
+          practice_areas?: string[]
+          pro_bono_available?: boolean
+          pro_bono_matters?: number
+          response_time?: string
+          success_rate?: number
+          user_id?: string | null
+          verified?: boolean
+          years_experience?: number
+        }
+        Update: {
+          availability?: string
+          bench?: string
+          bio?: string
+          created_at?: string
+          fee_inr?: number
+          id?: string
+          name?: string
+          practice_areas?: string[]
+          pro_bono_available?: boolean
+          pro_bono_matters?: number
+          response_time?: string
+          success_rate?: number
+          user_id?: string | null
+          verified?: boolean
+          years_experience?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          account_type: string
+          created_at: string
+          full_name: string
+          id: string
+        }
+        Insert: {
+          account_type?: string
+          created_at?: string
+          full_name?: string
+          id: string
+        }
+        Update: {
+          account_type?: string
+          created_at?: string
+          full_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_view_case: { Args: { _case_id: string }; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "client" | "lawyer" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +429,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["client", "lawyer", "admin"],
+    },
   },
 } as const
