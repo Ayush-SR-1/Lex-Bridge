@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Shell } from "@/components/lex/Shell";
 import { Panel, Eyebrow, Chip } from "@/components/lex/Panel";
+import { CaseRoom } from "@/components/lex/CaseRoom";
 import { formatDate, useSession } from "@/lib/session";
 
 export const Route = createFileRoute("/cases/$caseId")({
