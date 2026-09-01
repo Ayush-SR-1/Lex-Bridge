@@ -48,6 +48,7 @@ export function Shell({ children }: { children: ReactNode }) {
 
             <nav className="hidden items-center gap-7 md:flex">
               <NavLink to="/lawyers">Discover</NavLink>
+              <NavLink to="/triage">Triage</NavLink>
               <NavLink to="/dashboard">{isLawyer ? "Pipeline" : "My cases"}</NavLink>
               <NavLink to="/pro-bono">Pro bono</NavLink>
             </nav>
