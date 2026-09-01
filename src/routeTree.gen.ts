@@ -14,6 +14,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LawyersRouteImport } from './routes/lawyers'
 import { Route as ProBonoRouteImport } from './routes/pro-bono'
+import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const ProBonoRoute = ProBonoRouteImport.update({
   path: '/pro-bono',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CasesCaseIdRoute = CasesCaseIdRouteImport.update({
+  id: '/cases/$caseId',
+  path: '/cases/$caseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/lawyers': typeof LawyersRoute
   '/pro-bono': typeof ProBonoRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/lawyers': typeof LawyersRoute
   '/pro-bono': typeof ProBonoRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,22 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/lawyers': typeof LawyersRoute
   '/pro-bono': typeof ProBonoRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/lawyers' | '/pro-bono'
+  fullPaths:
+    '/' | '/auth' | '/dashboard' | '/lawyers' | '/pro-bono' | '/cases/$caseId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/lawyers' | '/pro-bono'
-  id: '__root__' | '/' | '/auth' | '/dashboard' | '/lawyers' | '/pro-bono'
+  to: '/' | '/auth' | '/dashboard' | '/lawyers' | '/pro-bono' | '/cases/$caseId'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/lawyers'
+    | '/pro-bono'
+    | '/cases/$caseId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +94,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   LawyersRoute: typeof LawyersRoute
   ProBonoRoute: typeof ProBonoRoute
+  CasesCaseIdRoute: typeof CasesCaseIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProBonoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cases/$caseId': {
+      id: '/cases/$caseId'
+      path: '/cases/$caseId'
+      fullPath: '/cases/$caseId'
+      preLoaderRoute: typeof CasesCaseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +150,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   LawyersRoute: LawyersRoute,
   ProBonoRoute: ProBonoRoute,
+  CasesCaseIdRoute: CasesCaseIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
