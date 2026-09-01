@@ -52,6 +52,47 @@ export type Database = {
           },
         ]
       }
+      case_messages: {
+        Row: {
+          body: string
+          case_id: string
+          created_at: string
+          id: string
+          sender_id: string
+          sender_name: string
+          sender_role: string
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          case_id: string
+          created_at?: string
+          id?: string
+          sender_id: string
+          sender_name?: string
+          sender_role?: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          case_id?: string
+          created_at?: string
+          id?: string
+          sender_id?: string
+          sender_name?: string
+          sender_role?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_messages_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       case_milestones: {
         Row: {
           case_id: string
