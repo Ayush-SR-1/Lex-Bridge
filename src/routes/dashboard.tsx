@@ -8,9 +8,9 @@ import { Panel, Eyebrow, Chip } from "@/components/lex/Panel";
 import { PRACTICE_AREAS, accountTypeOf, formatDate, formatFee, useSession } from "@/lib/session";
 
 export const Route = createFileRoute("/dashboard")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    engage: typeof search['engage'] === "string" ? (search['engage'] as string) : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { engage?: string } =>
+    typeof search['engage'] === "string" ? { engage: search['engage'] } : {},
+
   head: () => ({
     meta: [
       { title: "Your docket · LexBridge" },
